@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
+      options: --privileged
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: flatpak-rust-prost-demo.flatpak
+          manifest-path: com.gitlab.flatpak-rust-prost-demo.yml
