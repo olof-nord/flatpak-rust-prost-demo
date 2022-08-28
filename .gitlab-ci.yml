@@ -8,3 +8,8 @@ build:
   script:
     - cargo build
 
+package:
+  image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
+  stage: package
+  script:
+    - flatpak-builder build --verbose --force-clean --install-deps-from=flathub --ccache com.gitlab.flatpak-rust-prost-demo.yml
