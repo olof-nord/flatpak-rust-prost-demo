@@ -19,7 +19,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Build with cargo
         uses: actions-rs/cargo@v1
         with:
           command: build
@@ -35,7 +35,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Package with Flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: flatpak-rust-prost-demo.flatpak
