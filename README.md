@@ -1,4 +1,3 @@
-
 # flatpak-rust-prost-demo
 
 Demo rust cargo app with Flatpak packaging.
