@@ -1,0 +1,26 @@
+app-id: com.gitlab.flatpak-rust-prost-demo
+branch: main
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+build-options:
+  append-path: "/usr/lib/sdk/rust-stable/bin"
+  env:
+    CARGO_HOME: ${FLATPAK_BUILDER_BUILDDIR}/.cargo
+
+modules:
+  - name: flatpak-rust-prost-demo
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    subdir: src/github.com/olof-nord/flatpak-rust-prost-demo
+    build-commands:
+      - cargo build
+    sources:
+      - type: git
+        url: https://gitlab.com/olof-nord/flatpak-rust-prost-demo
+        tag: main
+        dest: src/github.com/olof-nord/flatpak-rust-prost-demo
