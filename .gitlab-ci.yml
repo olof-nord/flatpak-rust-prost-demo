@@ -1,0 +1,10 @@
+stages:
+  - build
+  - package
+
+build:
+  image: rust:1.63
+  stage: build
+  script:
+    - cargo build
+
